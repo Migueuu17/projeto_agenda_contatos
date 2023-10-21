@@ -1,8 +1,7 @@
 const form = document.getElementById("form-contato");
-const imgApagar =
-  '<img src="./imagens/baseline_clear_black_24dp.png" alt="delete imagem"/>';
 const contatos = [];
 const numeros = [];
+const footer = document.getElementById("quant-contatos");
 
 let linhas = "";
 
@@ -24,9 +23,12 @@ function adicionarLinha() {
   } else {
     contatos.push(inputNomeContato.value);
     numeros.push(inputNumeroContato.value);
-    let linha = "<tr>";
+    let linha = `<tr id="contato-${contatos.length - 1}">`;
     linha += `<td>${inputNomeContato.value}</td>`;
     linha += `<td>${inputNumeroContato.value}</td>`;
+    linha += `<td><button onclick="removerContato(${
+      contatos.length - 1
+    })">X</button></td>`;
     linha += "</tr>";
 
     linhas += linha;
@@ -38,6 +40,24 @@ function adicionarLinha() {
 function atualizarTabela() {
   const corpoTabela = document.querySelector("tbody");
   corpoTabela.innerHTML = linhas;
-  const footer = document.getElementById("quant-contatos");
+
   footer.innerHTML = `${contatos.length}`;
+}
+
+function removerContato(index) {
+  const contatoRemover = document.getElementById(`contato-${index}`);
+  document.querySelector("tbody").removeChild(contatoRemover);
+  contatos.splice(index, 1);
+  numeros.splice(index, 1);
+  linhas = ""; // Limpa as linhas
+  for (let i = 0; i < contatos.length; i++) {
+    let linha = `<tr id="contato-${i}">`;
+    linha += `<td>${contatos[i]}</td>`;
+    linha += `<td>${numeros[i]}</td>`;
+    linha += `<td><button onclick="removerContato(${i})">X</button></td>`;
+    linha += "</tr>";
+
+    linhas += linha;
+  }
+  atualizarTabela(); // Atualiza a tabela após a remoção
 }
