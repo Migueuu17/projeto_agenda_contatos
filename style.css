@@ -72,6 +72,13 @@ table td {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+table button {
+  background-color: red;
+  border: none;
+  padding: 5px;
+  font-weight: bold;
+}
+
 #text-quant {
   font-weight: bold;
 }
