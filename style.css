@@ -73,10 +73,16 @@ table td {
 }
 
 table button {
-  background-color: red;
+  background-color: #e7e7e7;
   border: none;
   padding: 5px;
   font-weight: bold;
+  cursor: pointer;
+}
+
+table button:hover {
+  transform: scale(1.1);
+  color: red;
 }
 
 #text-quant {
